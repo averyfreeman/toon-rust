@@ -1,12 +1,6 @@
 #![cfg(feature = "layout")]
 
-use toon_format::{
-    decode_with_layout,
-    DecodeOptions,
-    Delimiter,
-    FieldDescriptor,
-    NodeLayout,
-};
+use toon_format::{decode_with_layout, DecodeOptions, Delimiter, FieldDescriptor, NodeLayout};
 
 fn decode(input: &str) -> (serde_json::Value, toon_format::Layout) {
     decode_with_layout(input, &DecodeOptions::default()).expect("decode_with_layout failed")

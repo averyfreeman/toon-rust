@@ -1,15 +1,7 @@
 use crate::{
-    types::{
-        Delimiter,
-        EncodeOptions,
-        ToonResult,
-    },
+    types::{Delimiter, EncodeOptions, ToonResult},
     utils::{
-        string::{
-            is_valid_unquoted_key,
-            needs_quoting,
-            quote_string,
-        },
+        string::{is_valid_unquoted_key, needs_quoting, quote_string},
         QuotingContext,
     },
 };
@@ -79,6 +71,7 @@ impl Writer {
         length: usize,
         fields: Option<&[String]>,
         depth: usize,
+        is_keyed: bool,
     ) -> ToonResult<()> {
         if let Some(k) = key {
             if depth > 0 {
@@ -89,6 +82,10 @@ impl Writer {
 
         self.write_char('[')?;
         self.write_str(&length.to_string())?;
+
+        if is_keyed {
+            self.write_char(':')?;
+        }
 
         // Only write delimiter in header if it's not comma (comma is default/implied)
         if self.options.delimiter != Delimiter::Comma {
@@ -241,7 +238,7 @@ mod tests {
         let mut writer = Writer::new(opts);
 
         writer
-            .write_array_header(Some("items"), 3, None, 0)
+            .write_array_header(Some("items"), 3, None, 0, false)
             .unwrap();
         assert_eq!(writer.finish(), "items[3]:");
 
@@ -250,7 +247,7 @@ mod tests {
         let fields = vec!["id".to_string(), "name".to_string()];
 
         writer
-            .write_array_header(Some("users"), 2, Some(&fields), 0)
+            .write_array_header(Some("users"), 2, Some(&fields), 0, false)
             .unwrap();
         assert_eq!(writer.finish(), "users[2]{id,name}:");
     }
@@ -261,7 +258,7 @@ mod tests {
         let mut writer = Writer::new(opts);
 
         writer
-            .write_array_header(Some("items"), 3, None, 0)
+            .write_array_header(Some("items"), 3, None, 0, false)
             .unwrap();
         assert_eq!(writer.finish(), "items[3|]:");
 
@@ -270,7 +267,7 @@ mod tests {
         let fields = vec!["id".to_string(), "name".to_string()];
 
         writer
-            .write_array_header(Some("users"), 2, Some(&fields), 0)
+            .write_array_header(Some("users"), 2, Some(&fields), 0, false)
             .unwrap();
         assert_eq!(writer.finish(), "users[2|]{id|name}:");
     }

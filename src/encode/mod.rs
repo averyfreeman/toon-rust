@@ -9,19 +9,9 @@ use indexmap::IndexMap;
 use crate::{
     constants::MAX_DEPTH,
     types::{
-        EncodeOptions,
-        IntoJsonValue,
-        JsonValue as Value,
-        KeyFoldingMode,
-        ToonError,
-        ToonResult,
+        EncodeOptions, IntoJsonValue, JsonValue as Value, KeyFoldingMode, ToonError, ToonResult,
     },
-    utils::{
-        format_canonical_number,
-        normalize,
-        validation::validate_depth,
-        QuotingContext,
-    },
+    utils::{format_canonical_number, normalize, validation::validate_depth, QuotingContext},
 };
 
 /// Encode any serializable value to TOON format.
@@ -406,7 +396,7 @@ fn encode_primitive_array(
     arr: &[Value],
     depth: usize,
 ) -> ToonResult<()> {
-    writer.write_array_header(key, arr.len(), None, depth)?;
+    writer.write_array_header(key, arr.len(), None, depth, false)?;
     writer.write_char(' ')?;
     // Set delimiter context for array values (affects quoting decisions)
     writer.push_active_delimiter(writer.options.delimiter);
@@ -455,7 +445,7 @@ fn encode_tabular_array(
     keys: &[String],
     depth: usize,
 ) -> ToonResult<()> {
-    writer.write_array_header(key, arr.len(), Some(keys), depth)?;
+    writer.write_array_header(key, arr.len(), Some(keys), depth, false)?;
     writer.write_newline()?;
 
     writer.push_active_delimiter(writer.options.delimiter);
@@ -560,7 +550,7 @@ fn encode_nested_array(
     arr: &[Value],
     depth: usize,
 ) -> ToonResult<()> {
-    writer.write_array_header(key, arr.len(), None, depth)?;
+    writer.write_array_header(key, arr.len(), None, depth, false)?;
     writer.write_newline()?;
     writer.push_active_delimiter(writer.options.delimiter);
 
