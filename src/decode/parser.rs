@@ -1,39 +1,18 @@
-use serde_json::{
-    Map,
-    Number,
-    Value,
-};
+use serde_json::{Map, Number, Value};
 
 use crate::{
-    constants::{
-        KEYWORDS,
-        MAX_DEPTH,
-        QUOTED_KEY_MARKER,
-    },
+    constants::{KEYWORDS, MAX_DEPTH, QUOTED_KEY_MARKER},
     decode::{
-        scanner::{
-            Scanner,
-            Token,
-        },
+        scanner::{Scanner, Token},
         validation,
     },
-    types::{
-        DecodeOptions,
-        Delimiter,
-        ErrorContext,
-        ToonError,
-        ToonResult,
-    },
+    types::{DecodeOptions, Delimiter, ErrorContext, ToonError, ToonResult},
     utils::validation::validate_depth,
 };
 #[cfg(feature = "layout")]
 use crate::{
     decode::layout_builder::LayoutBuilder,
-    layout::{
-        FieldDescriptor,
-        Layout,
-        NodeLayout,
-    },
+    layout::{FieldDescriptor, Layout, NodeLayout},
 };
 
 /// Context for parsing arrays to determine correct indentation depth.
@@ -1684,10 +1663,7 @@ mod tests {
 
     #[test]
     fn test_round_trip_parentheses() {
-        use crate::{
-            decode::decode_default,
-            encode::encode_default,
-        };
+        use crate::{decode::decode_default, encode::encode_default};
 
         let original = json!({
             "message": "Mostly Functions (3 of 3)",

@@ -1,7 +1,4 @@
-use crate::layout::{
-    Layout,
-    NodeLayout,
-};
+use crate::layout::{Layout, NodeLayout};
 
 pub(crate) struct LayoutBuilder {
     stack: Vec<String>,

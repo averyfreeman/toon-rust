@@ -1,34 +1,15 @@
-use std::io::{
-    Read,
-    Write,
-};
+use std::io::{Read, Write};
 
 use serde::{
-    de::{
-        self,
-        DeserializeSeed,
-        Error as _,
-        MapAccess,
-        SeqAccess,
-        Visitor,
-    },
+    de::{self, DeserializeSeed, Error as _, MapAccess, SeqAccess, Visitor},
     Deserialize,
 };
 use serde_json::Value as SerdeValue;
 
 use super::writer::Writer;
 use crate::{
-    types::{
-        EncodeOptions,
-        JsonValue,
-        KeyFoldingMode,
-        ToonError,
-        ToonResult,
-    },
-    utils::{
-        normalize,
-        QuotingContext,
-    },
+    types::{EncodeOptions, JsonValue, KeyFoldingMode, ToonError, ToonResult},
+    utils::{normalize, QuotingContext},
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -726,7 +707,7 @@ impl<'a> StreamArrayEncoder<'a> {
                 .as_ref()
                 .ok_or_else(|| ToonError::SerializationError("tabular keys missing".to_string()))?;
             let mut writer = Writer::new(self.options.clone());
-            writer.write_array_header(None, self.len, Some(keys), self.array_depth)?;
+            writer.write_array_header(None, self.len, Some(keys), self.array_depth, false)?;
             writer.write_newline()?;
 
             for (i, row) in self.tabular_rows.iter().enumerate() {
@@ -742,7 +723,7 @@ impl<'a> StreamArrayEncoder<'a> {
 
         if self.all_primitives {
             let mut writer = Writer::new(self.options.clone());
-            writer.write_array_header(None, self.len, None, self.array_depth)?;
+            writer.write_array_header(None, self.len, None, self.array_depth, false)?;
             writer.write_char(' ')?;
             for (i, item) in self.primitive_chunks.iter().enumerate() {
                 if i > 0 {
@@ -754,7 +735,7 @@ impl<'a> StreamArrayEncoder<'a> {
         }
 
         let mut writer = Writer::new(self.options.clone());
-        writer.write_array_header(None, self.len, None, self.array_depth)?;
+        writer.write_array_header(None, self.len, None, self.array_depth, false)?;
         writer.write_newline()?;
 
         for (i, item) in self.nested_chunks.iter().enumerate() {
@@ -816,14 +797,8 @@ mod tests {
 
     use super::*;
     use crate::{
-        encode,
-        encode_default,
-        types::{
-            Delimiter,
-            EncodeOptions,
-            Indent,
-            KeyFoldingMode,
-        },
+        encode, encode_default,
+        types::{Delimiter, EncodeOptions, Indent, KeyFoldingMode},
     };
 
     #[test]
