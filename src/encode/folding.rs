@@ -67,6 +67,7 @@ pub fn analyze_foldable_chain(
     })
 }
 
+/// Performs the public `should_fold` operation.
 pub fn should_fold(mode: KeyFoldingMode, chain: &Option<FoldableChain>) -> bool {
     match mode {
         KeyFoldingMode::Off => false,

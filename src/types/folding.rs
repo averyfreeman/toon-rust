@@ -1,4 +1,5 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+/// Describes the public `KeyFoldingMode` type.
 pub enum KeyFoldingMode {
     /// No folding performed. All objects use standard nesting.
     #[default]
@@ -8,6 +9,7 @@ pub enum KeyFoldingMode {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+/// Describes the public `PathExpansionMode` type.
 pub enum PathExpansionMode {
     /// Dotted keys are treated as literal keys. No expansion.
     #[default]

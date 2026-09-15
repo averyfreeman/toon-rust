@@ -5,6 +5,7 @@ use crate::{
     types::{is_identifier_segment, JsonValue as Value, PathExpansionMode, ToonError, ToonResult},
 };
 
+/// Performs the public `should_expand_key` operation.
 pub fn should_expand_key(key: &str, mode: PathExpansionMode) -> Option<Vec<String>> {
     match mode {
         PathExpansionMode::Off => None,
@@ -34,6 +35,7 @@ pub fn should_expand_key(key: &str, mode: PathExpansionMode) -> Option<Vec<Strin
     }
 }
 
+/// Performs the public `deep_merge_value` operation.
 pub fn deep_merge_value(
     target: &mut IndexMap<String, Value>,
     segments: &[String],
@@ -94,6 +96,7 @@ pub fn deep_merge_value(
     deep_merge_value(nested_obj, remaining_segments, value, strict)
 }
 
+/// Performs the public `expand_paths_in_object` operation.
 pub fn expand_paths_in_object(
     obj: IndexMap<String, Value>,
     mode: PathExpansionMode,
@@ -132,6 +135,7 @@ pub fn expand_paths_in_object(
     Ok(result)
 }
 
+/// Performs the public `expand_paths_recursive` operation.
 pub fn expand_paths_recursive(
     value: Value,
     mode: PathExpansionMode,

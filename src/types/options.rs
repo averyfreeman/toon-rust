@@ -4,6 +4,7 @@ use crate::{
 };
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+/// Describes the public `Indent` type.
 pub enum Indent {
     Spaces(usize),
 }
@@ -15,6 +16,7 @@ impl Default for Indent {
 }
 
 impl Indent {
+    /// Performs the public `get_string` operation.
     pub fn get_string(&self, depth: usize) -> String {
         if depth == 0 {
             return String::new();
@@ -31,6 +33,7 @@ impl Indent {
         }
     }
 
+    /// Performs the public `get_spaces` operation.
     pub fn get_spaces(&self) -> usize {
         match self {
             Indent::Spaces(count) => *count,
@@ -40,6 +43,7 @@ impl Indent {
 
 /// Options for encoding JSON values to TOON format.
 #[derive(Debug, Clone, PartialEq, Eq)]
+/// Describes the public `EncodeOptions` type.
 pub struct EncodeOptions {
     pub delimiter: Delimiter,
     pub indent: Indent,
@@ -107,6 +111,7 @@ impl EncodeOptions {
 
 /// Options for decoding TOON format to JSON values.
 #[derive(Debug, Clone, PartialEq, Eq)]
+/// Describes the public `DecodeOptions` type.
 pub struct DecodeOptions {
     pub delimiter: Option<Delimiter>,
     pub strict: bool,
@@ -152,6 +157,7 @@ impl DecodeOptions {
         self
     }
 
+    /// Performs the public `with_indent` operation.
     pub fn with_indent(mut self, style: Indent) -> Self {
         self.indent = style;
         self

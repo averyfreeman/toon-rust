@@ -9,9 +9,11 @@ use ratatui::{
 
 use crate::tui::{state::AppState, theme::Theme};
 
+/// Describes the public `DiffViewer` type.
 pub struct DiffViewer;
 
 impl DiffViewer {
+    /// Performs the public `render` operation.
     pub fn render(f: &mut Frame, area: Rect, app: &AppState, theme: &Theme) {
         let block = Block::default()
             .borders(Borders::ALL)

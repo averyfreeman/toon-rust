@@ -31,6 +31,7 @@ struct NestedItems {
     items: Vec<Container>,
 }
 
+/// Performs the public `tabular` operation.
 pub fn tabular() {
     // JSON example: Arrays of objects (tabular)
     let items = json!({

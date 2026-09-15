@@ -24,6 +24,7 @@ struct Metadata {
     in_stock: bool,
 }
 
+/// Performs the public `serde_structs` operation.
 pub fn serde_structs() {
     // Simple struct encode/decode
     let user = User {

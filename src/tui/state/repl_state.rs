@@ -4,6 +4,7 @@ use std::collections::HashMap;
 
 /// REPL session state
 #[derive(Debug, Clone)]
+/// Describes the public `ReplState` type.
 pub struct ReplState {
     /// Whether REPL is active
     pub active: bool,
@@ -25,12 +26,14 @@ pub struct ReplState {
 
 /// A line in the REPL output
 #[derive(Debug, Clone)]
+/// Describes the public `ReplLine` type.
 pub struct ReplLine {
     pub kind: ReplLineKind,
     pub content: String,
 }
 
 #[derive(Debug, Clone, PartialEq)]
+/// Describes the public `ReplLineKind` type.
 pub enum ReplLineKind {
     Prompt,
     Success,
@@ -39,6 +42,7 @@ pub enum ReplLineKind {
 }
 
 impl ReplState {
+    /// Performs the public `new` operation.
     pub fn new() -> Self {
         Self {
             active: false,
@@ -55,18 +59,21 @@ impl ReplState {
         }
     }
 
+    /// Performs the public `activate` operation.
     pub fn activate(&mut self) {
         self.active = true;
         self.input.clear();
         self.history_index = None;
     }
 
+    /// Performs the public `deactivate` operation.
     pub fn deactivate(&mut self) {
         self.active = false;
         self.input.clear();
         self.history_index = None;
     }
 
+    /// Performs the public `add_prompt` operation.
     pub fn add_prompt(&mut self, cmd: &str) {
         self.output.push(ReplLine {
             kind: ReplLineKind::Prompt,
@@ -74,6 +81,7 @@ impl ReplState {
         });
     }
 
+    /// Performs the public `add_success` operation.
     pub fn add_success(&mut self, msg: String) {
         for line in msg.lines() {
             self.output.push(ReplLine {
@@ -83,6 +91,7 @@ impl ReplState {
         }
     }
 
+    /// Performs the public `add_error` operation.
     pub fn add_error(&mut self, msg: String) {
         self.output.push(ReplLine {
             kind: ReplLineKind::Error,
@@ -90,6 +99,7 @@ impl ReplState {
         });
     }
 
+    /// Performs the public `add_info` operation.
     pub fn add_info(&mut self, msg: String) {
         let content = if msg.is_empty() || msg.starts_with("  ") || msg.starts_with("📖") {
             msg
@@ -103,6 +113,7 @@ impl ReplState {
         });
     }
 
+    /// Performs the public `add_to_history` operation.
     pub fn add_to_history(&mut self, cmd: String) {
         if cmd.trim().is_empty() {
             return;
@@ -116,6 +127,7 @@ impl ReplState {
         }
     }
 
+    /// Performs the public `history_up` operation.
     pub fn history_up(&mut self) {
         if self.history.is_empty() {
             return;
@@ -131,6 +143,7 @@ impl ReplState {
         }
     }
 
+    /// Performs the public `history_down` operation.
     pub fn history_down(&mut self) {
         match self.history_index {
             None => (),
@@ -146,12 +159,14 @@ impl ReplState {
         }
     }
 
+    /// Performs the public `scroll_up` operation.
     pub fn scroll_up(&mut self) {
         if self.scroll_offset > 0 {
             self.scroll_offset -= 1;
         }
     }
 
+    /// Performs the public `scroll_down` operation.
     pub fn scroll_down(&mut self, visible_lines: usize) {
         let max_scroll = self.output.len().saturating_sub(visible_lines);
         if self.scroll_offset < max_scroll {
@@ -159,6 +174,7 @@ impl ReplState {
         }
     }
 
+    /// Performs the public `scroll_to_bottom` operation.
     pub fn scroll_to_bottom(&mut self) {
         if self.output.len() <= 30 {
             self.scroll_offset = 0;

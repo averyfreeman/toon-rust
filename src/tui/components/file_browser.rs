@@ -18,6 +18,7 @@ pub struct FileBrowser {
 }
 
 impl FileBrowser {
+    /// Performs the public `new` operation.
     pub fn new() -> Self {
         Self {
             selected_index: 0,
@@ -25,6 +26,7 @@ impl FileBrowser {
         }
     }
 
+    /// Performs the public `move_up` operation.
     pub fn move_up(&mut self) {
         if self.selected_index > 0 {
             self.selected_index -= 1;
@@ -34,12 +36,14 @@ impl FileBrowser {
         }
     }
 
+    /// Performs the public `move_down` operation.
     pub fn move_down(&mut self, max: usize) {
         if self.selected_index < max.saturating_sub(1) {
             self.selected_index += 1;
         }
     }
 
+    /// Performs the public `get_selected_entry` operation.
     pub fn get_selected_entry(&self, dir: &std::path::Path) -> Option<std::path::PathBuf> {
         let entries = self.get_directory_entries(dir);
         if self.selected_index < entries.len() {
@@ -54,10 +58,12 @@ impl FileBrowser {
         }
     }
 
+    /// Performs the public `get_entry_count` operation.
     pub fn get_entry_count(&self, dir: &std::path::Path) -> usize {
         self.get_directory_entries(dir).len()
     }
 
+    /// Performs the public `render` operation.
     pub fn render(&mut self, f: &mut Frame, area: Rect, app: &AppState, theme: &Theme) {
         let block = Block::default()
             .borders(Borders::ALL)

@@ -1,8 +1,12 @@
 //! Encoder Implementation
+/// Exposes the public `folding` module.
 pub mod folding;
 #[cfg(feature = "json_stream")]
+/// Exposes the public `json_stream` module.
 pub mod json_stream;
+/// Exposes the public `primitives` module.
 pub mod primitives;
+/// Exposes the public `writer` module.
 pub mod writer;
 use indexmap::IndexMap;
 

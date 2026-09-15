@@ -1,6 +1,7 @@
 use serde_json::json;
 use toon_format::{encode, Delimiter, EncodeOptions};
 
+/// Performs the public `delimiters` operation.
 pub fn delimiters() {
     let data = json!({
         "items": [

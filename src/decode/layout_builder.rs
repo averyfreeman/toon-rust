@@ -6,6 +6,7 @@ pub(crate) struct LayoutBuilder {
 }
 
 impl LayoutBuilder {
+    /// Performs the public `new` operation.
     pub fn new() -> Self {
         Self {
             stack: Vec::new(),
@@ -13,18 +14,22 @@ impl LayoutBuilder {
         }
     }
 
+    /// Performs the public `push` operation.
     pub fn push(&mut self, segment: impl Into<String>) {
         self.stack.push(segment.into());
     }
 
+    /// Performs the public `pop` operation.
     pub fn pop(&mut self) {
         self.stack.pop();
     }
 
+    /// Performs the public `record` operation.
     pub fn record(&mut self, node: NodeLayout) {
         self.layout.insert(self.current_path(), node);
     }
 
+    /// Performs the public `finish` operation.
     pub fn finish(self) -> Layout {
         self.layout
     }

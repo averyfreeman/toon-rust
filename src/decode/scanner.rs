@@ -2,6 +2,7 @@ use crate::types::{Delimiter, ToonError, ToonResult};
 
 /// Tokens produced by the scanner during lexical analysis.
 #[derive(Debug, Clone, PartialEq)]
+/// Describes the public `Token` type.
 pub enum Token {
     LeftBracket,
     RightBracket,
@@ -22,6 +23,7 @@ pub enum Token {
 
 /// Scanner that tokenizes TOON input into a sequence of tokens.
 #[derive(Debug)]
+/// Describes the public `Scanner` type.
 pub struct Scanner {
     input: Vec<char>,
     position: usize,
@@ -58,18 +60,22 @@ impl Scanner {
         (self.line, self.column)
     }
 
+    /// Performs the public `get_line` operation.
     pub fn get_line(&self) -> usize {
         self.line
     }
 
+    /// Performs the public `get_column` operation.
     pub fn get_column(&self) -> usize {
         self.column
     }
 
+    /// Performs the public `peek` operation.
     pub fn peek(&self) -> Option<char> {
         self.input.get(self.position).copied()
     }
 
+    /// Performs the public `count_leading_spaces` operation.
     pub fn count_leading_spaces(&self) -> usize {
         let mut idx = self.position;
         let mut count = 0;
@@ -84,6 +90,7 @@ impl Scanner {
         count
     }
 
+    /// Performs the public `count_spaces_after_newline` operation.
     pub fn count_spaces_after_newline(&self) -> usize {
         let mut idx = self.position;
         if self.input.get(idx) != Some(&'\n') {
@@ -102,10 +109,12 @@ impl Scanner {
         count
     }
 
+    /// Performs the public `peek_ahead` operation.
     pub fn peek_ahead(&self, offset: usize) -> Option<char> {
         self.input.get(self.position + offset).copied()
     }
 
+    /// Performs the public `advance` operation.
     pub fn advance(&mut self) -> Option<char> {
         if let Some(ch) = self.input.get(self.position) {
             self.position += 1;
@@ -121,6 +130,7 @@ impl Scanner {
         }
     }
 
+    /// Performs the public `skip_whitespace` operation.
     pub fn skip_whitespace(&mut self) {
         self.last_whitespace_count = 0;
         while let Some(ch) = self.peek() {
@@ -133,10 +143,12 @@ impl Scanner {
         }
     }
 
+    /// Performs the public `last_whitespace_count` operation.
     pub fn last_whitespace_count(&self) -> usize {
         self.last_whitespace_count
     }
 
+    /// Performs the public `last_token_text` operation.
     pub fn last_token_text(&self) -> &str {
         &self.last_token_text
     }
@@ -330,6 +342,7 @@ impl Scanner {
         }
     }
 
+    /// Performs the public `get_last_line_indent` operation.
     pub fn get_last_line_indent(&self) -> usize {
         self.last_line_indent
     }
@@ -556,6 +569,7 @@ impl Scanner {
         Ok(Token::String(trimmed.to_string(), false))
     }
 
+    /// Performs the public `detect_delimiter` operation.
     pub fn detect_delimiter(&mut self) -> Option<Delimiter> {
         let saved_pos = self.position;
 

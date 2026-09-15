@@ -13,6 +13,7 @@ use crate::{
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+/// Describes the public `StreamingEncodeOptions` type.
 pub struct StreamingEncodeOptions {
     pub streaming_depth: usize,
 }
@@ -24,10 +25,12 @@ impl Default for StreamingEncodeOptions {
 }
 
 impl StreamingEncodeOptions {
+    /// Performs the public `new` operation.
     pub fn new() -> Self {
         Self::default()
     }
 
+    /// Performs the public `with_streaming_depth` operation.
     pub fn with_streaming_depth(mut self, depth: usize) -> Self {
         self.streaming_depth = depth;
         self

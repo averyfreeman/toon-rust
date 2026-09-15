@@ -4,6 +4,7 @@ use anyhow::{bail, Result};
 
 /// Parsed REPL command with inline data
 #[derive(Debug, Clone)]
+/// Describes the public `ReplCommand` type.
 pub struct ReplCommand {
     pub name: String,
     pub inline_data: Option<String>,
@@ -74,10 +75,12 @@ impl ReplCommand {
         })
     }
 
+    /// Performs the public `has_flag` operation.
     pub fn has_flag(&self, flag: &str) -> bool {
         self.args.iter().any(|a| a == flag)
     }
 
+    /// Performs the public `get_option` operation.
     pub fn get_option(&self, option: &str) -> Option<&str> {
         self.args
             .iter()

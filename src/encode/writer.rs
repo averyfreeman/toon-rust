@@ -28,21 +28,25 @@ impl Writer {
         self.buffer
     }
 
+    /// Performs the public `write_str` operation.
     pub fn write_str(&mut self, s: &str) -> ToonResult<()> {
         self.buffer.push_str(s);
         Ok(())
     }
 
+    /// Performs the public `write_char` operation.
     pub fn write_char(&mut self, ch: char) -> ToonResult<()> {
         self.buffer.push(ch);
         Ok(())
     }
 
+    /// Performs the public `write_newline` operation.
     pub fn write_newline(&mut self) -> ToonResult<()> {
         self.buffer.push('\n');
         Ok(())
     }
 
+    /// Performs the public `write_indent` operation.
     pub fn write_indent(&mut self, depth: usize) -> ToonResult<()> {
         let indent_string = self.options.indent.get_string(depth);
         if !indent_string.is_empty() {
@@ -51,11 +55,13 @@ impl Writer {
         Ok(())
     }
 
+    /// Performs the public `write_delimiter` operation.
     pub fn write_delimiter(&mut self) -> ToonResult<()> {
         self.buffer.push(self.options.delimiter.as_char());
         Ok(())
     }
 
+    /// Performs the public `write_key` operation.
     pub fn write_key(&mut self, key: &str) -> ToonResult<()> {
         if is_valid_unquoted_key(key) {
             self.write_str(key)
@@ -132,6 +138,7 @@ impl Writer {
         self.write_char(':')
     }
 
+    /// Performs the public `needs_quoting` operation.
     pub fn needs_quoting(&self, s: &str, context: QuotingContext) -> bool {
         // Use active delimiter for array values, document delimiter for object values
         let delim_char = match context {
@@ -141,10 +148,12 @@ impl Writer {
         needs_quoting(s, delim_char)
     }
 
+    /// Performs the public `write_quoted_string` operation.
     pub fn write_quoted_string(&mut self, s: &str) -> ToonResult<()> {
         self.write_str(&quote_string(s))
     }
 
+    /// Performs the public `write_value` operation.
     pub fn write_value(&mut self, s: &str, context: QuotingContext) -> ToonResult<()> {
         if self.needs_quoting(s, context) {
             self.write_quoted_string(s)

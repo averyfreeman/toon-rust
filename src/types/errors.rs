@@ -5,6 +5,7 @@ pub type ToonResult<T> = std::result::Result<T, ToonError>;
 
 /// Errors that can occur during TOON encoding or decoding.
 #[derive(Error, Debug, Clone, PartialEq)]
+/// Describes the public `ToonError` type.
 pub enum ToonError {
     #[error("Invalid input: {0}")]
     InvalidInput(String),
@@ -51,6 +52,7 @@ pub enum ToonError {
 /// Contextual information for error reporting, including source location
 /// and suggestions.
 #[derive(Debug, Clone, PartialEq, Eq)]
+/// Describes the public `ErrorContext` type.
 pub struct ErrorContext {
     pub source_line: String,
     pub preceding_lines: Vec<String>,

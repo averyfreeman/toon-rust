@@ -6,6 +6,7 @@ use std::{
 use indexmap::IndexMap;
 
 #[derive(Clone, Debug, PartialEq)]
+/// Describes the public `Number` type.
 pub enum Number {
     PosInt(u64),
     NegInt(i64),
@@ -13,6 +14,7 @@ pub enum Number {
 }
 
 impl Number {
+    /// Performs the public `from_f64` operation.
     pub fn from_f64(f: f64) -> Option<Self> {
         if f.is_finite() {
             Some(Number::Float(f))
@@ -21,6 +23,7 @@ impl Number {
         }
     }
 
+    /// Performs the public `is_i64` operation.
     pub fn is_i64(&self) -> bool {
         match self {
             Number::NegInt(_) => true,
@@ -32,6 +35,7 @@ impl Number {
         }
     }
 
+    /// Performs the public `is_u64` operation.
     pub fn is_u64(&self) -> bool {
         match self {
             Number::PosInt(_) => true,
@@ -43,10 +47,12 @@ impl Number {
         }
     }
 
+    /// Performs the public `is_f64` operation.
     pub fn is_f64(&self) -> bool {
         matches!(self, Number::Float(_))
     }
 
+    /// Performs the public `as_i64` operation.
     pub fn as_i64(&self) -> Option<i64> {
         match self {
             Number::PosInt(u) => {
@@ -68,6 +74,7 @@ impl Number {
         }
     }
 
+    /// Performs the public `as_u64` operation.
     pub fn as_u64(&self) -> Option<u64> {
         match self {
             Number::PosInt(u) => Some(*u),
@@ -87,6 +94,7 @@ impl Number {
         }
     }
 
+    /// Performs the public `as_f64` operation.
     pub fn as_f64(&self) -> Option<f64> {
         match self {
             Number::PosInt(u) => Some(*u as f64),
@@ -95,6 +103,7 @@ impl Number {
         }
     }
 
+    /// Performs the public `is_integer` operation.
     pub fn is_integer(&self) -> bool {
         match self {
             Number::PosInt(_) | Number::NegInt(_) => true,
@@ -192,9 +201,11 @@ impl From<f64> for Number {
     }
 }
 
+/// Describes the public `Object` type.
 pub type Object = IndexMap<String, JsonValue>;
 
 #[derive(Clone, Debug, PartialEq, Default)]
+/// Describes the public `JsonValue` type.
 pub enum JsonValue {
     #[default]
     Null,
@@ -206,26 +217,32 @@ pub enum JsonValue {
 }
 
 impl JsonValue {
+    /// Performs the public `fn` operation.
     pub const fn is_null(&self) -> bool {
         matches!(self, JsonValue::Null)
     }
 
+    /// Performs the public `fn` operation.
     pub const fn is_bool(&self) -> bool {
         matches!(self, JsonValue::Bool(_))
     }
 
+    /// Performs the public `fn` operation.
     pub const fn is_number(&self) -> bool {
         matches!(self, JsonValue::Number(_))
     }
 
+    /// Performs the public `fn` operation.
     pub const fn is_string(&self) -> bool {
         matches!(self, JsonValue::String(_))
     }
 
+    /// Performs the public `fn` operation.
     pub const fn is_array(&self) -> bool {
         matches!(self, JsonValue::Array(_))
     }
 
+    /// Performs the public `fn` operation.
     pub const fn is_object(&self) -> bool {
         matches!(self, JsonValue::Object(_))
     }
@@ -246,6 +263,7 @@ impl JsonValue {
         }
     }
 
+    /// Performs the public `is_f64` operation.
     pub fn is_f64(&self) -> bool {
         match self {
             JsonValue::Number(n) => n.is_f64(),
@@ -289,6 +307,7 @@ impl JsonValue {
         }
     }
 
+    /// Performs the public `as_str` operation.
     pub fn as_str(&self) -> Option<&str> {
         match self {
             JsonValue::String(s) => Some(s),
@@ -296,6 +315,7 @@ impl JsonValue {
         }
     }
 
+    /// Performs the public `as_array` operation.
     pub fn as_array(&self) -> Option<&Vec<JsonValue>> {
         match self {
             JsonValue::Array(arr) => Some(arr),
@@ -303,6 +323,7 @@ impl JsonValue {
         }
     }
 
+    /// Performs the public `as_array_mut` operation.
     pub fn as_array_mut(&mut self) -> Option<&mut Vec<JsonValue>> {
         match self {
             JsonValue::Array(arr) => Some(arr),
@@ -310,6 +331,7 @@ impl JsonValue {
         }
     }
 
+    /// Performs the public `as_object` operation.
     pub fn as_object(&self) -> Option<&Object> {
         match self {
             JsonValue::Object(obj) => Some(obj),
@@ -317,6 +339,7 @@ impl JsonValue {
         }
     }
 
+    /// Performs the public `as_object_mut` operation.
     pub fn as_object_mut(&mut self) -> Option<&mut Object> {
         match self {
             JsonValue::Object(obj) => Some(obj),
@@ -329,6 +352,7 @@ impl JsonValue {
         std::mem::replace(self, JsonValue::Null)
     }
 
+    /// Performs the public `type_name` operation.
     pub fn type_name(&self) -> &'static str {
         match self {
             JsonValue::Null => "null",
@@ -506,6 +530,7 @@ impl From<&JsonValue> for serde_json::Value {
     }
 }
 
+/// Describes the public `IntoJsonValue` type.
 pub trait IntoJsonValue {
     fn into_json_value(self) -> JsonValue;
 }

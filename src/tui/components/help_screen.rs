@@ -9,9 +9,11 @@ use ratatui::{
 
 use crate::tui::{keybindings::KeyBindings, theme::Theme};
 
+/// Describes the public `HelpScreen` type.
 pub struct HelpScreen;
 
 impl HelpScreen {
+    /// Performs the public `render` operation.
     pub fn render(f: &mut Frame, area: Rect, theme: &Theme) {
         let block = Block::default()
             .borders(Borders::ALL)

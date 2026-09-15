@@ -1,11 +1,18 @@
+/// Exposes the public `literal` module.
 pub mod literal;
+/// Exposes the public `number` module.
 pub mod number;
+/// Exposes the public `string` module.
 pub mod string;
+/// Exposes the public `validation` module.
 pub mod validation;
 
 use indexmap::IndexMap;
+/// Exposes the public `item` value.
 pub use literal::{is_keyword, is_literal_like, is_numeric_like, is_structural_char};
+/// Exposes the public `item` value.
 pub use number::format_canonical_number;
+/// Exposes the public `item` value.
 pub use string::{
     escape_string, is_valid_unquoted_key, needs_quoting, quote_string, unescape_string,
 };
@@ -14,6 +21,7 @@ use crate::types::{JsonValue as Value, Number};
 
 /// Context for determining when quoting is needed.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+/// Describes the public `QuotingContext` type.
 pub enum QuotingContext {
     ObjectValue,
     ArrayValue,

@@ -28,6 +28,7 @@ struct User {
     active: bool,
 }
 
+/// Performs the public `objects` operation.
 pub fn objects() {
     // JSON example: Simple object
     let simple = json!({

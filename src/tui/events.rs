@@ -11,6 +11,7 @@ pub enum Event {
     Resize,
 }
 
+/// Describes the public `EventHandler` type.
 pub struct EventHandler;
 
 impl EventHandler {

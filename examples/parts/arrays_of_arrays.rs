@@ -17,6 +17,7 @@ struct Matrix {
     matrix: Vec<Vec<f64>>,
 }
 
+/// Performs the public `arrays_of_arrays` operation.
 pub fn arrays_of_arrays() {
     // JSON example: Arrays containing primitive inner arrays
     let pairs = json!({

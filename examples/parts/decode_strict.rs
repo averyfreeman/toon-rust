@@ -1,6 +1,7 @@
 use serde_json::Value;
 use toon_format::{decode, DecodeOptions};
 
+/// Performs the public `decode_strict` operation.
 pub fn decode_strict() {
     // Malformed: header says 2 rows, but only 1 provided
     let malformed = "items[2]{id,name}:\n  1,Ada";

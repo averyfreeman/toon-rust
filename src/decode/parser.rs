@@ -32,6 +32,7 @@ enum ArrayParseContext {
 
 /// Parser that builds JSON values from a sequence of tokens.
 #[allow(unused)]
+/// Describes the public `Parser` type.
 pub struct Parser<'a> {
     scanner: Scanner,
     current_token: Token,
@@ -62,12 +63,14 @@ impl<'a> Parser<'a> {
     }
 
     #[cfg(feature = "layout")]
+    /// Performs the public `with_layout` operation.
     pub fn with_layout(mut self) -> Self {
         self.layout = Some(LayoutBuilder::new());
         self
     }
 
     #[cfg(feature = "layout")]
+    /// Performs the public `take_layout` operation.
     pub fn take_layout(&mut self) -> Option<Layout> {
         self.layout.take().map(LayoutBuilder::finish)
     }

@@ -1,9 +1,13 @@
 //! Decoder Implementation
+/// Exposes the public `expansion` module.
 pub mod expansion;
 #[cfg(feature = "layout")]
 pub(crate) mod layout_builder;
+/// Exposes the public `parser` module.
 pub mod parser;
+/// Exposes the public `scanner` module.
 pub mod scanner;
+/// Exposes the public `validation` module.
 pub mod validation;
 
 use serde_json::Value;
@@ -266,6 +270,7 @@ pub fn decode_default<T: serde::de::DeserializeOwned>(input: &str) -> ToonResult
 /// # Ok::<(), toon_format::ToonError>(())
 /// ```
 #[cfg(feature = "layout")]
+/// Performs the public `decode_with_layout` operation.
 pub fn decode_with_layout(
     input: &str,
     options: &DecodeOptions,

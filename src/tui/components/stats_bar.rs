@@ -9,9 +9,11 @@ use ratatui::{
 
 use crate::tui::{state::AppState, theme::Theme};
 
+/// Describes the public `StatsBar` type.
 pub struct StatsBar;
 
 impl StatsBar {
+    /// Performs the public `render` operation.
     pub fn render(f: &mut Frame, area: Rect, app: &AppState, theme: &Theme) {
         if let Some(ref stats) = app.stats {
             let spans = vec![

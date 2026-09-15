@@ -8,9 +8,11 @@ use ratatui::{
 
 use crate::tui::{state::AppState, theme::Theme};
 
+/// Describes the public `EditorComponent` type.
 pub struct EditorComponent;
 
 impl EditorComponent {
+    /// Performs the public `render` operation.
     pub fn render(
         f: &mut Frame,
         input_area: Rect,

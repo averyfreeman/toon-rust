@@ -4,6 +4,7 @@ use crossterm::event::{KeyCode, KeyEvent, KeyModifiers};
 
 /// Actions that can be triggered by keyboard shortcuts.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+/// Describes the public `Action` type.
 pub enum Action {
     Quit,
     ToggleMode,
@@ -27,6 +28,7 @@ pub enum Action {
     None,
 }
 
+/// Describes the public `KeyBindings` type.
 pub struct KeyBindings;
 
 impl KeyBindings {

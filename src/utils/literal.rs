@@ -6,11 +6,13 @@ pub fn is_literal_like(s: &str) -> bool {
 }
 
 #[inline]
+/// Performs the public `is_keyword` operation.
 pub fn is_keyword(s: &str) -> bool {
     constants::is_keyword(s)
 }
 
 #[inline]
+/// Performs the public `is_structural_char` operation.
 pub fn is_structural_char(ch: char) -> bool {
     constants::is_structural_char(ch)
 }

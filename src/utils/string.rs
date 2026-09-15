@@ -158,6 +158,7 @@ pub fn quote_string(s: &str) -> String {
     format!("\"{}\"", escape_string(s))
 }
 
+/// Performs the public `split_by_delimiter` operation.
 pub fn split_by_delimiter(s: &str, delimiter: Delimiter) -> Vec<String> {
     let mut result = Vec::new();
     let mut current = String::new();

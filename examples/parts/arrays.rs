@@ -17,6 +17,7 @@ struct Mixed {
     data: Vec<serde_json::Value>,
 }
 
+/// Performs the public `arrays` operation.
 pub fn arrays() {
     // JSON example
     let data = json!({ "tags": ["admin", "ops", "dev"] });

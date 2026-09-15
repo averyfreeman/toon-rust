@@ -1,3 +1,4 @@
+/// Performs the public `is_primitive` operation.
 pub fn is_primitive(value: &serde_json::Value) -> bool {
     matches!(
         value,
@@ -8,6 +9,7 @@ pub fn is_primitive(value: &serde_json::Value) -> bool {
     )
 }
 
+/// Performs the public `all_primitives` operation.
 pub fn all_primitives(values: &[serde_json::Value]) -> bool {
     values.iter().all(is_primitive)
 }

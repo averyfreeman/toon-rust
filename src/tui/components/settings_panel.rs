@@ -12,9 +12,11 @@ use crate::{
     types::{Delimiter, Indent, KeyFoldingMode, PathExpansionMode},
 };
 
+/// Describes the public `SettingsPanel` type.
 pub struct SettingsPanel;
 
 impl SettingsPanel {
+    /// Performs the public `render` operation.
     pub fn render(f: &mut Frame, area: Rect, app: &AppState, theme: &Theme) {
         let block = Block::default()
             .borders(Borders::ALL)

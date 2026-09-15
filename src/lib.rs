@@ -25,31 +25,45 @@
 //! ```
 #![warn(rustdoc::missing_crate_level_docs)]
 
+/// Exposes the public `constants` module.
 pub mod constants;
+/// Exposes the public `decode` module.
 pub mod decode;
+/// Exposes the public `encode` module.
 pub mod encode;
 #[cfg(feature = "layout")]
+/// Exposes the public `layout` module.
 pub mod layout;
 #[cfg(feature = "cli")]
+/// Exposes the public `tui` module.
 pub mod tui;
+/// Exposes the public `types` module.
 pub mod types;
+/// Exposes the public `utils` module.
 pub mod utils;
 
 #[cfg(feature = "layout")]
+/// Exposes the public `item` value.
 pub use decode::decode_with_layout;
+/// Exposes the public `item` value.
 pub use decode::{
     decode, decode_default, decode_no_coerce, decode_no_coerce_with_options, decode_strict,
     decode_strict_with_options,
 };
 #[cfg(feature = "json_stream")]
+/// Exposes the public `item` value.
 pub use encode::json_stream::{
     encode_json_reader, encode_json_reader_default, encode_json_stream, encode_json_stream_default,
     StreamingEncodeOptions,
 };
+/// Exposes the public `item` value.
 pub use encode::{encode, encode_array, encode_default, encode_object};
 #[cfg(feature = "layout")]
+/// Exposes the public `item` value.
 pub use layout::{FieldDescriptor, Layout, NodeLayout};
+/// Exposes the public `item` value.
 pub use types::{DecodeOptions, Delimiter, EncodeOptions, Indent, ToonError};
+/// Exposes the public `item` value.
 pub use utils::{
     literal::{is_keyword, is_literal_like},
     normalize,

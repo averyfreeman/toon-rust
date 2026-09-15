@@ -24,6 +24,7 @@ pub struct TuiApp<'a> {
 }
 
 impl<'a> TuiApp<'a> {
+    /// Performs the public `new` operation.
     pub fn new() -> Self {
         Self {
             app_state: AppState::new(),
@@ -31,6 +32,7 @@ impl<'a> TuiApp<'a> {
         }
     }
 
+    /// Performs the public `run` operation.
     pub fn run<B: ratatui::backend::Backend>(
         &mut self,
         terminal: &mut ratatui::Terminal<B>,

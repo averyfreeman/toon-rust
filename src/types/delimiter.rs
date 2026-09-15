@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 
 /// Delimiter character used to separate array elements.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+/// Describes the public `Delimiter` type.
 pub enum Delimiter {
     #[default]
     Comma,

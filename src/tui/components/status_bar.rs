@@ -9,9 +9,11 @@ use ratatui::{
 
 use crate::tui::{state::AppState, theme::Theme};
 
+/// Describes the public `StatusBar` type.
 pub struct StatusBar;
 
 impl StatusBar {
+    /// Performs the public `render` operation.
     pub fn render(f: &mut Frame, area: Rect, app: &AppState, theme: &Theme) {
         let chunks = Layout::default()
             .direction(Direction::Horizontal)

@@ -8,9 +8,11 @@ use ratatui::{
 
 use crate::tui::state::{AppState, ReplLineKind};
 
+/// Describes the public `ReplPanel` type.
 pub struct ReplPanel;
 
 impl ReplPanel {
+    /// Performs the public `render` operation.
     pub fn render(f: &mut Frame, area: Rect, app: &mut AppState) {
         let chunks = Layout::default()
             .direction(Direction::Vertical)

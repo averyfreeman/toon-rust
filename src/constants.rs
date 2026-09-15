@@ -23,11 +23,13 @@ pub const MAX_DEPTH: usize = 256;
 pub(crate) const QUOTED_KEY_MARKER: char = '\x00';
 
 #[inline]
+/// Performs the public `is_structural_char` operation.
 pub fn is_structural_char(ch: char) -> bool {
     STRUCTURAL_CHARS.contains(&ch)
 }
 
 #[inline]
+/// Performs the public `is_keyword` operation.
 pub fn is_keyword(s: &str) -> bool {
     KEYWORDS.contains(&s)
 }

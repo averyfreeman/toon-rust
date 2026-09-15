@@ -20,6 +20,7 @@ struct ListItems {
     items: Vec<Item>,
 }
 
+/// Performs the public `mixed_arrays` operation.
 pub fn mixed_arrays() {
     // JSON example: Mixed / non-uniform arrays (list format)
     let mixed = json!({

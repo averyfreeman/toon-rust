@@ -10,6 +10,7 @@ struct Product {
     categories: Vec<String>,
 }
 
+/// Performs the public `round_trip` operation.
 pub fn round_trip() {
     // JSON example
     let original = json!({

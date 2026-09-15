@@ -46,11 +46,13 @@ use crate::types::Delimiter;
 /// are not recorded.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Default)]
+/// Describes the public `Layout` type.
 pub struct Layout {
     nodes: BTreeMap<String, NodeLayout>,
 }
 
 impl Layout {
+    /// Performs the public `new` operation.
     pub fn new() -> Self {
         Self::default()
     }
@@ -65,10 +67,12 @@ impl Layout {
         self.nodes.iter().map(|(k, v)| (k.as_str(), v))
     }
 
+    /// Performs the public `len` operation.
     pub fn len(&self) -> usize {
         self.nodes.len()
     }
 
+    /// Performs the public `is_empty` operation.
     pub fn is_empty(&self) -> bool {
         self.nodes.is_empty()
     }
@@ -84,6 +88,7 @@ impl Layout {
 /// and key-folding metadata are planned for a follow-up.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
+/// Describes the public `NodeLayout` type.
 pub enum NodeLayout {
     /// Tabular array: `key[N]{f1,f2,...}:` with rows on subsequent lines.
     Tabular {
@@ -109,12 +114,14 @@ pub enum NodeLayout {
 /// TOON v3.0 it is always `None`.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq)]
+/// Describes the public `FieldDescriptor` type.
 pub struct FieldDescriptor {
     pub name: String,
     pub nested: Option<Box<NodeLayout>>,
 }
 
 impl FieldDescriptor {
+    /// Performs the public `leaf` operation.
     pub fn leaf(name: impl Into<String>) -> Self {
         Self {
             name: name.into(),

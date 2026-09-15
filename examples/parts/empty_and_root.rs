@@ -1,6 +1,7 @@
 use serde_json::json;
 use toon_format::encode_default;
 
+/// Performs the public `empty_and_root` operation.
 pub fn empty_and_root() {
     // Empty containers
     let empty_items = json!({ "items": [] });
